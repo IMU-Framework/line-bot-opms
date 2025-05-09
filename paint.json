@@ -1,0 +1,111 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "deca",
+      "header": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "白色",
+            "color": "#000000",
+            "size": "xxl",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "HEX: #FFFFFF",
+            "color": "#000000",
+            "size": "lg",
+            "margin": "lg"
+          }
+        ],
+        "paddingAll": "12px",
+        "height": "150px",
+        "backgroundColor": "#FFFFFF"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "RGB: 255 / 255 / 255",
+            "size": "sm",
+            "color": "#666666"
+          },
+          {
+            "type": "text",
+            "text": "CMYK: 0 / 0 / 0 / 0",
+            "size": "sm",
+            "color": "#666666"
+          },
+          {
+            "type": "text",
+            "text": "油漆編號: W-01",
+            "size": "sm",
+            "color": "#666666"
+          }
+        ],
+        "spacing": "md",
+        "paddingAll": "12px"
+      }
+    },
+    {
+      "type": "bubble",
+      "size": "deca",
+      "header": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "黑色",
+            "color": "#FFFFFF",
+            "size": "xxl",
+            "weight": "bold"
+          },
+          {
+            "type": "text",
+            "text": "HEX: #000000",
+            "color": "#FFFFFF",
+            "size": "lg",
+            "margin": "lg"
+          }
+        ],
+        "paddingAll": "12px",
+        "height": "150px",
+        "backgroundColor": "#000000"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "RGB: 0 / 0 / 0",
+            "size": "sm",
+            "color": "#666666"
+          },
+          {
+            "type": "text",
+            "text": "CMYK: 0 / 0 / 0 / 100",
+            "size": "sm",
+            "color": "#666666"
+          },
+          {
+            "type": "text",
+            "text": "油漆編號: B-01",
+            "size": "sm",
+            "color": "#666666"
+          }
+        ],
+        "spacing": "md",
+        "paddingAll": "12px"
+      }
+    }
+  ]
+}
