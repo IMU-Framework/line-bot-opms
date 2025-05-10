@@ -37,44 +37,44 @@ def load_flex_template(filename):
 
 @handler.add(MessageEvent, message=TextMessageContent)
 def handle_text_message(event):
-    text = event.message.text.strip().lower()
-    config = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
+    text = event.message.text.strip()
 
-    with ApiClient(config) as api_client:
-        line_bot_api = MessagingApi(api_client)
+    configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
 
-        if text in ["油漆色號", "paint"]:
-            contents = load_flex_template("paint.json")
-            line_bot_api.reply_message(
+    if text == "油漆色號":
+        flex_message = load_paint_flex_json()
+        reply = FlexMessage(
+            alt_text="油漆色號資訊",
+            contents=FlexContainer.from_dict(flex_message)
+        )
+
+    elif text in ["企業識別", "CIS"]:
+        flex_message = load_cis_flex_json()
+        reply = FlexMessage(
+            alt_text="企業識別色卡",
+            contents=FlexContainer.from_dict(flex_message)
+        )
+
+    elif text == "查詢功能索引":
+        reply = TextMessage(
+            text=(
+                "請輸入以下指令之一：\n"
+                "- 油漆色號\n"
+                "- 企業識別 or CIS"
+            )
+        )
+    else:
+        # 非指令 → 不回覆
+        return
+
+    # 發送訊息（在前面任何條件中有匹配才會執行）
+    try:
+        with ApiClient(configuration) as api_client:
+            MessagingApi(api_client).reply_message(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
-                    messages=[FlexMessage(
-                        alt_text="油漆色號",
-                        contents=FlexContainer.from_dict(contents)
-                    )]
+                    messages=[reply]
                 )
             )
-        elif text in ["cis", "企業識別"]:
-            contents = load_flex_template("cis.json")
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[FlexMessage(
-                        alt_text="企業識別色卡",
-                        contents=FlexContainer.from_dict(contents)
-                    )]
-                )
-            )
-        else:
-            line_bot_api.reply_message(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[TextMessage(
-                        text=(
-                            "請輸入以下指令之一：\n"
-                            "- 油漆色號\n"
-                            "- 企業識別 or CIS"
-                        )
-                    )]
-                )
-            )
+    except Exception as e:
+        print(f"回覆訊息時發生錯誤: {str(e)}")
