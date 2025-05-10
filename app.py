@@ -70,9 +70,11 @@ def handle_text_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[TextMessage(
-                        text="請輸入以下指令之一：
-- 油漆色號
-- 企業識別 or CIS"
+                        text=(
+                            "請輸入以下指令之一：\n"
+                            "- 油漆色號\n"
+                            "- 企業識別 or CIS"
+                        )
                     )]
                 )
             )
