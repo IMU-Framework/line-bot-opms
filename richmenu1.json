@@ -1,0 +1,95 @@
+{
+  "size": {
+    "width": 2048,
+    "height": 1381
+  },
+  "selected": true,
+  "name": "OPMS-文件資訊查詢",
+  "chatBarText": "專案選單",
+  "areas": [
+    {
+      "bounds": {
+        "x": 1024,
+        "y": 0,
+        "width": 1024,
+        "height": 160
+      },
+      "action": {
+        "type": "message",
+        "text": "richmenu2"
+      }
+    },
+    {
+      "bounds": {
+        "x": 0,
+        "y": 160,
+        "width": 682,
+        "height": 560
+      },
+      "action": {
+        "type": "message",
+        "text": "查詢功能索引"
+      }
+    },
+    {
+      "bounds": {
+        "x": 682,
+        "y": 160,
+        "width": 682,
+        "height": 560
+      },
+      "action": {
+        "type": "uri",
+        "uri": "http://imuframework.com"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1364,
+        "y": 160,
+        "width": 682,
+        "height": 560
+      },
+      "action": {
+        "type": "uri",
+        "uri": "http://imuframework.com"
+      }
+    },
+    {
+      "bounds": {
+        "x": 0,
+        "y": 720,
+        "width": 682,
+        "height": 560
+      },
+      "action": {
+        "type": "uri",
+        "uri": "http://imuframework.com"
+      }
+    },
+    {
+      "bounds": {
+        "x": 682,
+        "y": 720,
+        "width": 682,
+        "height": 560
+      },
+      "action": {
+        "type": "uri",
+        "uri": "http://imuframework.com"
+      }
+    },
+    {
+      "bounds": {
+        "x": 1364,
+        "y": 720,
+        "width": 682,
+        "height": 560
+      },
+      "action": {
+        "type": "uri",
+        "uri": "http://imuframework.com"
+      }
+    }
+  ]
+}
