@@ -46,7 +46,7 @@ def handle_message(event):
         elif text == "richmenu2" and RICHMENU2_ID:
             api.link_rich_menu_to_user(user_id, RICHMENU2_ID)
 
-        elif text == "查詢功能綜合":
+        elif text == "查詢功能索引":
             api.reply_message(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
