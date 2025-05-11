@@ -12,9 +12,10 @@ HEADERS = {
     "Content-Type": "application/json"
 }
 
-RICHMENU_ID_MAP = {
-    "richmenu1": None,
-    "richmenu2": None
+# Alias 對應表
+ALIAS_MAP = {
+    "richmenu1": "richmenu-alias-1",
+    "richmenu2": "richmenu-alias-2"
 }
 
 def list_richmenus():
@@ -51,22 +52,24 @@ def save_richmenu_map(mapping):
     with open("richmenu_map.py", "w", encoding="utf-8") as f:
         f.write("RICHMENU_ID_MAP = " + json.dumps(mapping, indent=2, ensure_ascii=False))
 
-def handle_postback_event(event: PostbackEvent, line_bot_api):
-    user_id = event.source.user_id
-    data = event.postback.data
-
-    print(f"[POSTBACK] user_id: {user_id}")
-    print(f"[POSTBACK] data: {data}")
-
-    if data.startswith("goto="):
-        target_key = data.split("=")[1]
-        target_id = RICHMENU_ID_MAP.get(target_key)
-
-        if target_id:
-            print(f"[POSTBACK] Switching to: {target_key} ({target_id})")
-            line_bot_api.link_rich_menu_to_user(user_id, target_id)
+def bind_alias(alias_id, richmenu_id):
+    url = f"{LINE_API_BASE}/richmenu/alias/{alias_id}"
+    create = requests.post(
+        f"{LINE_API_BASE}/richmenu/alias",
+        headers=HEADERS,
+        json={"richMenuAliasId": alias_id, "richMenuId": richmenu_id}
+    )
+    if create.status_code == 200:
+        print(f"✅ Alias {alias_id} 已建立")
+    elif create.status_code == 409:
+        print(f"⚠️ Alias {alias_id} 已存在，執行更新...")
+        patch = requests.patch(url, headers=HEADERS, json={"richMenuId": richmenu_id})
+        if patch.status_code == 200:
+            print(f"✅ Alias {alias_id} 已更新")
         else:
-            print(f"[ERROR] Unknown richmenu key: {target_key}")
+            print(f"❌ 更新 alias 失敗: {patch.text}")
+    else:
+        print(f"❌ 建立 alias 失敗: {create.text}")
 
 def main(menu_name, delete_old):
     menu_map = {
@@ -103,8 +106,12 @@ def main(menu_name, delete_old):
     RICHMENU_ID_MAP[menu_name] = richmenu_id
     save_richmenu_map(RICHMENU_ID_MAP)
 
-    print(f"已完成部署：{menu_name} 並設為預設 Rich Menu（ID: {richmenu_id}）")
-    print("→ richmenu_map.py 已更新")
+    # 建立或更新 alias 綁定
+    alias = ALIAS_MAP[menu_name]
+    bind_alias(alias, richmenu_id)
+
+    print(f"✅ 已完成部署：{menu_name} 並設為預設 Rich Menu（ID: {richmenu_id}）")
+    print(f"→ Alias {alias} 也已完成綁定")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
