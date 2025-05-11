@@ -1,6 +1,7 @@
 from flask import Flask, request, abort
 import os
 import json
+import subprocess
 
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
@@ -76,6 +77,12 @@ def handle_message(event):
 
         else:
             return  # 不回應其他非指定輸入
+
+# 自動部署 Rich Menu（僅在雲端執行環境中）
+if os.environ.get("AUTO_DEPLOY_RICHMENU") == "true":
+    print("⚙️ 正在自動部署 Rich Menu...")
+    subprocess.run(["python", "scripts/deploy_richmenu.py", "--menu", "richmenu1", "--delete-old"])
+    print("✅ Rich Menu 自動部署完成")
 
 if __name__ == "__main__":
     app.run(debug=True)
