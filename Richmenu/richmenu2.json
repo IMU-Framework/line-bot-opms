@@ -5,37 +5,30 @@
   "chatBarText": "專案選單",
   "areas": [
     {
-      // 文件資訊查詢
       "bounds": {"x": 0, "y": 0, "width": 1150, "height": 290},
       "action": {"type": "postback", "data": "goto=richmenu1"}
     },
     {
-      // 平面圖
       "bounds": {"x": 113, "y": 398, "width": 688, "height": 540},
       "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      // 立面圖
       "bounds": {"x": 906, "y": 398, "width": 688, "height": 540},
       "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      // 施工詳圖
       "bounds": {"x": 1699, "y": 398, "width": 688, "height": 540},
       "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      // 各部門座位表
       "bounds": {"x": 113, "y": 1038, "width": 688, "height": 540},
       "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      // 廣告工程設計圖
       "bounds": {"x": 906, "y": 1038, "width": 688, "height": 540},
       "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      // 各分區3D示意
       "bounds": {"x": 1699, "y": 1038, "width": 688, "height": 540},
       "action": {"type": "uri", "uri": "http://imuframework.com"}
     }
