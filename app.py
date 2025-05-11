@@ -1,6 +1,11 @@
 from flask import Flask, request, abort
 import os
+import sys
 import json
+
+# 手動加入 scripts 資料夾到匯入路徑
+sys.path.append(os.path.join(os.path.dirname(__file__), "scripts"))
+
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
 from linebot.v3.webhooks import MessageEvent, TextMessageContent, PostbackEvent
