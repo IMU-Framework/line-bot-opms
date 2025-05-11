@@ -3,7 +3,9 @@ import os
 import json
 from linebot.v3 import WebhookHandler
 from linebot.v3.exceptions import InvalidSignatureError
-from linebot.v3.webhooks import MessageEvent, TextMessageContent
+from linebot.v3.webhooks import MessageEvent, TextMessageContent, PostbackEvent
+from scripts.deploy_richmenu import handle_postback_event
+from scripts.richmenu_map import RICHMENU_ID_MAP
 from linebot.v3.messaging import (
     Configuration, ApiClient, MessagingApi,
     ReplyMessageRequest, TextMessage, FlexMessage, FlexContainer
@@ -71,6 +73,13 @@ def handle_message(event):
 
         else:
             return  # 不回應其他非指定輸入
+
+@handler.add(PostbackEvent)
+def route_postback(event):
+    configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
+    with ApiClient(configuration) as api_client:
+        api = MessagingApi(api_client)
+        handle_postback_event(event, api)
 
 if __name__ == "__main__":
     app.run(debug=True)
