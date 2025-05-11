@@ -1,95 +1,43 @@
 {
-  "size": {
-    "width": 2048,
-    "height": 1381
-  },
+  "size": {"width": 2500, "height": 1686},
   "selected": false,
   "name": "OPMS-設計施工圖冊",
   "chatBarText": "專案選單",
   "areas": [
     {
-      "bounds": {
-        "x": 0,
-        "y": 0,
-        "width": 1024,
-        "height": 160
-      },
-      "action": {
-        "type": "message",
-        "text": "richmenu1"
-      }
+      // 文件資訊查詢
+      "bounds": {"x": 0, "y": 0, "width": 1150, "height": 290},
+      "action": {"type": "postback", "data": "goto=richmenu1"}
     },
     {
-      "bounds": {
-        "x": 0,
-        "y": 160,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 平面圖
+      "bounds": {"x": 113, "y": 398, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 682,
-        "y": 160,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 立面圖
+      "bounds": {"x": 906, "y": 398, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 1364,
-        "y": 160,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 施工詳圖
+      "bounds": {"x": 1699, "y": 398, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 0,
-        "y": 720,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 各部門座位表
+      "bounds": {"x": 113, "y": 1038, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 682,
-        "y": 720,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 廣告工程設計圖
+      "bounds": {"x": 906, "y": 1038, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 1364,
-        "y": 720,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 各分區3D示意
+      "bounds": {"x": 1699, "y": 1038, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     }
   ]
 }

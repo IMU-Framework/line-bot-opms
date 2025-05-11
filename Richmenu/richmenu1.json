@@ -1,95 +1,43 @@
 {
-  "size": {
-    "width": 2048,
-    "height": 1381
-  },
+  "size": {"width": 2500, "height": 1686},
   "selected": true,
   "name": "OPMS-文件資訊查詢",
   "chatBarText": "專案選單",
   "areas": [
     {
-      "bounds": {
-        "x": 1024,
-        "y": 0,
-        "width": 1024,
-        "height": 160
-      },
-      "action": {
-        "type": "message",
-        "text": "richmenu2"
-      }
+      // 設計施工圖冊
+      "bounds": {"x": 1350, "y": 0, "width": 1150, "height": 290},
+      "action": {"type": "postback", "data": "goto=richmenu2"}
     },
     {
-      "bounds": {
-        "x": 0,
-        "y": 160,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "message",
-        "text": "查詢功能索引"
-      }
+      // 查詢功能索引
+      "bounds": {"x": 113, "y": 398, "width": 688, "height": 540},
+      "action": {"type": "message", "text": "查詢功能索引"}
     },
     {
-      "bounds": {
-        "x": 682,
-        "y": 160,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 標單及合約
+      "bounds": {"x": 906, "y": 398, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 1364,
-        "y": 160,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 工程記錄會議記錄
+      "bounds": {"x": 1699, "y": 398, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 0,
-        "y": 720,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 家具設備表
+      "bounds": {"x": 113, "y": 1038, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 682,
-        "y": 720,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 建材五金表
+      "bounds": {"x": 906, "y": 1038, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     },
     {
-      "bounds": {
-        "x": 1364,
-        "y": 720,
-        "width": 682,
-        "height": 560
-      },
-      "action": {
-        "type": "uri",
-        "uri": "http://imuframework.com"
-      }
+      // 聯絡簿
+      "bounds": {"x": 1699, "y": 1038, "width": 688, "height": 540},
+      "action": {"type": "uri", "uri": "http://imuframework.com"}
     }
   ]
 }
