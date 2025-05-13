@@ -2,7 +2,6 @@ import os
 import json
 import argparse
 import requests
-from linebot.v3.webhooks import PostbackEvent
 
 LINE_API_BASE = "https://api.line.me/v2/bot"
 ACCESS_TOKEN = os.environ["LINE_CHANNEL_ACCESS_TOKEN"]
@@ -16,6 +15,18 @@ HEADERS = {
 ALIAS_MAP = {
     "richmenu1": "richmenu-alias-1",
     "richmenu2": "richmenu-alias-2"
+}
+
+# Menu 對應 JSON 與圖片
+MENU_MAP = {
+    "richmenu1": {
+        "json": "Richmenu/richmenu1.json",
+        "img": "Richmenu/OPMS_Richmenu_Advanced-1.png"
+    },
+    "richmenu2": {
+        "json": "Richmenu/richmenu2.json",
+        "img": "Richmenu/OPMS_Richmenu_Advanced-2.png"
+    }
 }
 
 def list_richmenus():
@@ -44,14 +55,6 @@ def upload_image(richmenu_id, image_path):
     response = requests.post(f"{LINE_API_BASE}/richmenu/{richmenu_id}/content", headers=image_headers, data=image_data)
     response.raise_for_status()
 
-def set_default_richmenu(richmenu_id):
-    response = requests.post(f"{LINE_API_BASE}/user/all/richmenu/{richmenu_id}", headers=HEADERS)
-    response.raise_for_status()
-
-def save_richmenu_map(mapping):
-    with open("richmenu_map.py", "w", encoding="utf-8") as f:
-        f.write("RICHMENU_ID_MAP = " + json.dumps(mapping, indent=2, ensure_ascii=False))
-
 def bind_alias(alias_id, richmenu_id):
     url = f"{LINE_API_BASE}/richmenu/alias/{alias_id}"
     create = requests.post(
@@ -71,51 +74,32 @@ def bind_alias(alias_id, richmenu_id):
     else:
         print(f"❌ 建立 alias 失敗: {create.text}")
 
-def main(menu_name, delete_old):
-    menu_map = {
-        "richmenu1": {
-            "json": "Richmenu/richmenu1.json",
-            "img": "Richmenu/OPMS_Richmenu_Advanced-1.png"
-        },
-        "richmenu2": {
-            "json": "Richmenu/richmenu2.json",
-            "img": "Richmenu/OPMS_Richmenu_Advanced-2.png"
-        }
-    }
-
-    if menu_name not in menu_map:
-        print("錯誤：請指定 richmenu1 或 richmenu2")
+def deploy(menu_name, delete_old=False):
+    if menu_name not in MENU_MAP:
+        print("錯誤：請指定 richmenu1、richmenu2 或 all")
         return
 
     if delete_old:
-        print("正在刪除所有舊有 Rich Menu...")
+        print("🧹 正在刪除所有舊有 Rich Menu...")
         for menu in list_richmenus():
             try:
                 delete_richmenu(menu["richMenuId"])
-                print(f"已刪除：{menu['name']} ({menu['richMenuId']})")
+                print(f"🗑 已刪除：{menu['name']} ({menu['richMenuId']})")
             except Exception as e:
-                print(f"刪除失敗：{e}")
+                print(f"❌ 刪除失敗：{e}")
 
-    print(f"建立並部署 {menu_name} 中...")
-    menu = menu_map[menu_name]
-    richmenu_id = create_richmenu(menu["json"])
-    upload_image(richmenu_id, menu["img"])
-    set_default_richmenu(richmenu_id)
-
-    # 更新對應表並存入 richmenu_map.py
-    RICHMENU_ID_MAP[menu_name] = richmenu_id
-    save_richmenu_map(RICHMENU_ID_MAP)
-
-    # 建立或更新 alias 綁定
-    alias = ALIAS_MAP[menu_name]
-    bind_alias(alias, richmenu_id)
-
-    print(f"✅ 已完成部署：{menu_name} 並設為預設 Rich Menu（ID: {richmenu_id}）")
-    print(f"→ Alias {alias} 也已完成綁定")
+    menu_list = MENU_MAP.keys() if menu_name == "all" else [menu_name]
+    for name in menu_list:
+        print(f"🚧 建立並部署 {name} 中...")
+        menu = MENU_MAP[name]
+        richmenu_id = create_richmenu(menu["json"])
+        upload_image(richmenu_id, menu["img"])
+        bind_alias(ALIAS_MAP[name], richmenu_id)
+        print(f"✅ {name} 部署完成（ID: {richmenu_id}）並綁定 alias {ALIAS_MAP[name]}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--menu", required=True, help="richmenu1 或 richmenu2")
+    parser.add_argument("--menu", required=True, help="richmenu1、richmenu2 或 all")
     parser.add_argument("--delete-old", action="store_true", help="刪除所有現有 Rich Menu")
     args = parser.parse_args()
-    main(args.menu, args.delete_old)
+    deploy(args.menu, args.delete_old)
