@@ -13,8 +13,8 @@ HEADERS = {
 
 # Alias 對應表
 ALIAS_MAP = {
-    "richmenu1": "richmenu-alias-1",
-    "richmenu2": "richmenu-alias-2"
+    "richmenu1": "richmenu-1",
+    "richmenu2": "richmenu-2"
 }
 
 # Menu 對應 JSON 與圖片
