@@ -80,9 +80,12 @@ def handle_message(event):
 
 # 自動部署 Rich Menu（僅在雲端執行環境中）
 if os.environ.get("AUTO_DEPLOY_RICHMENU") == "true":
-    print("⚙️ 正在自動部署 Rich Menu...")
-    subprocess.run(["python", "scripts/deploy_richmenu.py", "--menu", "richmenu1", "--delete-old"])
-    print("✅ Rich Menu 自動部署完成")
+    print("⚙️ 正在自動部署 Rich Menus...")
+    subprocess.run(["python", "scripts/deploy_richmenu.py", "--menu", "all", "--delete-old"])
+    print("✅ Rich Menu richmenu1 + richmenu2 自動部署完成")
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
