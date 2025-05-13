@@ -8,7 +8,7 @@
       "bounds": { "x": 1350, "y": 0, "width": 1150, "height": 290 },
       "action": {
         "type": "richmenuswitch",
-        "richMenuAliasId": "richmenu-alias-2",
+        "richMenuAliasId": "richmenu-2",
         "data": "switch-to-2"
       }
     },
