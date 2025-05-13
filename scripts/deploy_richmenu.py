@@ -75,7 +75,7 @@ def bind_alias(alias_id, richmenu_id):
         print(f"❌ 建立 alias 失敗: {create.text}")
 
 def deploy(menu_name, delete_old=False):
-    if menu_name not in MENU_MAP:
+    if menu_name not in ["richmenu1", "richmenu2", "all"]:
         print("錯誤：請指定 richmenu1、richmenu2 或 all")
         return
 
