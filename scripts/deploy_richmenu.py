@@ -45,14 +45,33 @@ def create_richmenu(json_path):
     response.raise_for_status()
     return response.json()["richMenuId"]
 
+# def upload_image(richmenu_id, image_path):
+#     with open(image_path, "rb") as f:
+#         image_data = f.read()
+#     image_headers = {
+#         "Authorization": f"Bearer {ACCESS_TOKEN}",
+#         "Content-Type": "image/png"
+#     }
+#     response = requests.post(f"{LINE_API_BASE}/richmenu/{richmenu_id}/content", headers=image_headers, data=image_data)
+#     response.raise_for_status()
+
 def upload_image(richmenu_id, image_path):
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"❌ 找不到圖片檔案：{image_path}")
+
     with open(image_path, "rb") as f:
         image_data = f.read()
+
     image_headers = {
         "Authorization": f"Bearer {ACCESS_TOKEN}",
         "Content-Type": "image/png"
     }
-    response = requests.post(f"{LINE_API_BASE}/richmenu/{richmenu_id}/content", headers=image_headers, data=image_data)
+
+    response = requests.post(
+        f"{LINE_API_BASE}/richmenu/{richmenu_id}/content",
+        headers=image_headers,
+        data=image_data
+    )
     response.raise_for_status()
 
 def bind_alias(alias_id, richmenu_id):
