@@ -9,6 +9,7 @@ from linebot.v3.messaging import (
     Configuration, ApiClient, MessagingApi,
     ReplyMessageRequest, TextMessage, FlexMessage, FlexContainer
 )
+from modules.notion_paint import build_paint_table_flex
 
 app = Flask(__name__)
 
@@ -57,6 +58,18 @@ def handle_message(event):
                     messages=[FlexMessage(
                         alt_text="油漆色號",
                         contents=FlexContainer.from_dict(paint_flex)
+                    )]
+                )
+            )
+
+        elif text == "色卡":
+            flex = build_paint_table_flex()
+            api.reply_message(
+                ReplyMessageRequest(
+                    reply_token=event.reply_token,
+                    messages=[FlexMessage(
+                        alt_text="油漆色卡",
+                        contents=FlexContainer.from_dict(flex)
                     )]
                 )
             )
