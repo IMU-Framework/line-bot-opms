@@ -9,12 +9,15 @@ from linebot.v3.messaging import (
     Configuration, ApiClient, MessagingApi,
     ReplyMessageRequest, TextMessage, FlexMessage, FlexContainer
 )
+
 from modules.notion_paint import build_paint_table_flex
 
 app = Flask(__name__)
 
+# 讀取環境變數
 CHANNEL_ACCESS_TOKEN = os.environ.get("LINE_CHANNEL_ACCESS_TOKEN")
 CHANNEL_SECRET = os.environ.get("LINE_CHANNEL_SECRET")
+
 handler = WebhookHandler(CHANNEL_SECRET)
 
 @app.route("/", methods=["GET"])
@@ -44,7 +47,7 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[TextMessage(
-                        text="請輸入下列指令之一：\n- 油漆色號\n- 企業識別 or CIS"
+                        text="請輸入下列指令之一：\n- 油漆色號\n- 色卡\n- 企業識別 or CIS"
                     )]
                 )
             )
@@ -63,16 +66,26 @@ def handle_message(event):
             )
 
         elif text == "色卡":
-            flex = build_paint_table_flex()
-            api.reply_message(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[FlexMessage(
-                        alt_text="油漆色卡",
-                        contents=FlexContainer.from_dict(flex)
-                    )]
+            try:
+                flex = build_paint_table_flex()
+                print("✅ Flex JSON 輸出：", json.dumps(flex, ensure_ascii=False, indent=2))  # DEBUG
+                api.reply_message(
+                    ReplyMessageRequest(
+                        reply_token=event.reply_token,
+                        messages=[FlexMessage(
+                            alt_text="油漆色卡",
+                            contents=FlexContainer.from_dict(flex)
+                        )]
+                    )
                 )
-            )
+            except Exception as e:
+                print("❌ 發送色卡失敗：", e)  # DEBUG
+                api.reply_message(
+                    ReplyMessageRequest(
+                        reply_token=event.reply_token,
+                        messages=[TextMessage(text="⚠️ 色卡讀取失敗，請稍後再試")]
+                    )
+                )
 
         elif text in ["企業識別", "cis"]:
             with open("flex_templates/cis.json", "r", encoding="utf-8") as f:
@@ -88,7 +101,7 @@ def handle_message(event):
             )
 
         else:
-            return  # 不回應其他非指定輸入
+            return  # 不回應未指定指令
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
