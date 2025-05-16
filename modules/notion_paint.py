@@ -22,90 +22,124 @@ def build_paint_table_flex():
     for row in notion_rows:
         props = row["properties"]
 
+        # 擷取欄位值
         title = get_text(props.get("Title", {}).get("title", []))
         name = get_text(props.get("Name", {}).get("rich_text", []))
-        site1 = get_text(props.get("Site1", {}).get("rich_text", []))
-        site2 = get_text(props.get("Site2", {}).get("rich_text", []))
-        site3 = get_text(props.get("Site3", {}).get("rich_text", []))
-        brand = get_text(props.get("Brand", {}).get("rich_text", []))
+        site1 = get_text(props.get("Site1", {}).get("rich_text", [])) or "-"
+        site2 = get_text(props.get("Site2", {}).get("rich_text", [])) or "-"
+        site3 = get_text(props.get("Site3", {}).get("rich_text", [])) or "-"
+        brand = get_text(props.get("Brand", {}).get("rich_text", [])) or ""
         color_number = get_text(props.get("ColorNumber", {}).get("rich_text", [])) or "色號未提供"
         uri = props.get("uri", {}).get("url", "#")
         color_code = get_text(props.get("ColorCode", {}).get("rich_text", [])) or "#CCCCCC"
 
-        site_contents = []
-        for site in [site1, site2, site3]:
-            if site:
-                site_contents.append({
-                    "type": "text",
-                    "text": site,
-                    "size": "xs",
-                    "wrap": True
-                })
-
         bubble = {
             "type": "bubble",
-            "size": "micro",
-            "body": {
+            "size": "deca",
+            "header": {
                 "type": "box",
                 "layout": "vertical",
-                "spacing": "sm",
                 "contents": [
                     {
                         "type": "text",
-                        "text": title or "無標題",
-                        "weight": "bold",
-                        "size": "sm",
-                        "wrap": True
+                        "text": title,
+                        "color": "#ffffff",
+                        "align": "start",
+                        "size": "xxl",
+                        "gravity": "center",
+                        "weight": "bold"
                     },
                     {
                         "type": "text",
                         "text": name,
-                        "size": "xs",
-                        "color": "#aaaaaa",
-                        "wrap": True
+                        "color": "#ffffff",
+                        "align": "start",
+                        "size": "lg",
+                        "gravity": "center",
+                        "margin": "lg"
+                    }
+                ],
+                "paddingTop": "19px",
+                "paddingAll": "12px",
+                "paddingBottom": "16px",
+                "height": "150px"
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "spacing": "md",
+                "paddingAll": "12px",
+                "contents": [
+                    {
+                        "type": "box",
+                        "layout": "baseline",
+                        "flex": 1,
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "位置1",
+                                "color": "#8C8C8C",
+                                "size": "sm",
+                                "wrap": True,
+                                "flex": 1
+                            },
+                            {
+                                "type": "text",
+                                "text": site1,
+                                "flex": 2,
+                                "size": "sm",
+                                "color": "#666666"
+                            }
+                        ]
                     },
                     {
                         "type": "box",
-                        "layout": "vertical",
-                        "spacing": "xs",
-                        "margin": "md",
-                        "contents": site_contents
-                    },
-                    {
-                        "type": "text",
-                        "text": brand,
-                        "size": "xs",
-                        "color": "#aaaaaa",
-                        "margin": "md",
-                        "wrap": True
+                        "layout": "baseline",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": "位置2",
+                                "flex": 1,
+                                "size": "sm",
+                                "color": "#8C8C8C"
+                            },
+                            {
+                                "type": "text",
+                                "text": site2,
+                                "flex": 2,
+                                "color": "#666666",
+                                "size": "sm"
+                            }
+                        ]
                     }
                 ]
             },
             "footer": {
                 "type": "box",
                 "layout": "vertical",
-                "spacing": "sm",
                 "contents": [
                     {
+                        "type": "text",
+                        "text": brand,
+                        "align": "center",
+                        "weight": "bold"
+                    },
+                    {
                         "type": "button",
-                        "style": "link",
-                        "height": "sm",
                         "action": {
                             "type": "uri",
                             "label": color_number,
                             "uri": uri
-                        },
-                        "color": color_code
+                        }
                     }
-                ],
-                "flex": 0
+                ]
             },
             "styles": {
-                "body": {
+                "header": {
                     "backgroundColor": color_code
                 },
                 "footer": {
-                    "backgroundColor": color_code
+                    "separator": False
                 }
             }
         }
@@ -114,7 +148,7 @@ def build_paint_table_flex():
 
     return {
         "type": "carousel",
-        "contents": bubbles
+        "contents": bubbles[:10]  # 限制最多10張卡片
     }
 
 def get_text(rich_items):
