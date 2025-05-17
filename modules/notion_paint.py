@@ -132,7 +132,7 @@ def build_paint_table_flex():
                         "text": title,
                         "color": text_color,  # 根據背景色自動調整文字顏色
                         "align": "start",
-                        "size": "xxl",
+                        "size": "lg",
                         "gravity": "center",
                         "weight": "bold"
                     },
@@ -161,7 +161,6 @@ def build_paint_table_flex():
                     {
                         "type": "box",
                         "layout": "baseline",
-                        # "flex": 1,
                         "contents": [
                             {
                                 "type": "text",
@@ -240,7 +239,7 @@ def build_paint_table_flex():
             "styles": {
                 "header": {
                     "backgroundColor": color_code,
-                    "aspectRatio": "3:2"
+                    "aspectRatio": "16:9"
                 },
                 "footer": {
                     "separator": False
