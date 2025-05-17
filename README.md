@@ -12,6 +12,6 @@ line-bot-opms/
 │   └── paint.json            # 油漆色號
 │
 └── modules/                  # 動態 Flex Message fetching Notion DB
-    ├── paint.json            # 油漆色卡
-    └── next_module.json      # 下一個模組
+    ├── notion_paint.py       # 產生油漆色卡 .json
+    └── next_module.py        # 下一個模組
 ```
