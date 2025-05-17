@@ -239,7 +239,7 @@ def build_paint_table_flex():
             "styles": {
                 "header": {
                     "backgroundColor": color_code,
-                    "aspectRatio": "16:9"
+                    "height": "120px"
                 },
                 "footer": {
                     "separator": False
