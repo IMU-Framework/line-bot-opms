@@ -106,11 +106,12 @@ def build_paint_table_flex():
                       "label": color_number,
                       "data": "user requests for detail"
                 }
+            }
         else:
             # 當 URI 有值時，使用按鈕進行外部連結
             footer_content = {
                 "type": "button",
-                "style": "link"
+                "style": "link",
                 "height": "sm",
                 "action": {
                     "type": "uri",
