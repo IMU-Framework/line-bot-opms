@@ -161,7 +161,7 @@ def build_paint_table_flex():
                     {
                         "type": "box",
                         "layout": "baseline",
-                        "flex": 1,
+                        # "flex": 1,
                         "contents": [
                             {
                                 "type": "text",
