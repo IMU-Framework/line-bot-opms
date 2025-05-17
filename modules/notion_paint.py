@@ -98,21 +98,25 @@ def build_paint_table_flex():
         if not uri:
             # 當 URI 為空時，使用不同的內容呈現方式，而不是按鈕
             footer_content = {
-                "type": "text",
-                "text": color_number,
-                "align": "center",
-                "color": "#888888"  # 使用灰色文字表示這不是可點擊的內容
-            }
+                "type": "button",
+                "style": "link",
+                "height": "sm",
+                "action": {
+                      "type": "postback",
+                      "label": color_number,
+                      "data": "user requests for detail"
+                }
         else:
             # 當 URI 有值時，使用按鈕
             footer_content = {
                 "type": "button",
+                "style": "link"
+                "height": "sm",
                 "action": {
                     "type": "uri",
                     "label": color_number,
                     "uri": uri
                 },
-                "style": "link"
             }
 
         bubble = {
@@ -246,7 +250,7 @@ def build_paint_table_flex():
 
     return {
         "type": "carousel",
-        "contents": bubbles  # 無設限卡片數量
+        "contents": bubbles[:12]  # 設限卡片數量上限12
     }
 
 def get_text(rich_items):
