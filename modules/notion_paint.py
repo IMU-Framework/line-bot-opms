@@ -246,7 +246,7 @@ def build_paint_table_flex():
 
     return {
         "type": "carousel",
-        "contents": bubbles[:10]  # 限制最多10張卡片
+        "contents": bubbles  # 無設限卡片數量
     }
 
 def get_text(rich_items):
