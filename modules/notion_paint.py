@@ -44,11 +44,27 @@ def build_paint_table_flex():
         color_number = get_text(props.get("ColorNumber", {}).get("rich_text", [])) or "色號未定"
         color_code = get_text(props.get("ColorCode", {}).get("rich_text", [])) or "#CCCCCC"  # 預設灰色
 
-        # URI 處理 - 如果為空則使用預設值並禁用按鈕
+        # URI 處理 - 如果為空則完全禁用按鈕
         uri = props.get("uri", {}).get("url", "")
-        button_disabled = not bool(uri)  # 如果 uri 為空則禁用按鈕
         if not uri:
-            uri = "https://example.com"  # 必須提供一個有效的 URI，即使按鈕被禁用
+            # 當 URI 為空時，使用不同的內容呈現方式，而不是按鈕
+            footer_content = {
+                "type": "text",
+                "text": color_number,
+                "align": "center",
+                "color": "#888888"  # 使用灰色文字表示這不是可點擊的內容
+            }
+        else:
+            # 當 URI 有值時，使用按鈕
+            footer_content = {
+                "type": "button",
+                "action": {
+                    "type": "uri",
+                    "label": color_number,
+                    "uri": uri
+                },
+                "style": "link"
+            }
 
         bubble = {
             "type": "bubble",
@@ -173,11 +189,10 @@ def build_paint_table_flex():
                             "uri": uri
                         },
                         "style": "link",
-                        # "color": color_code,
                         "disabled": button_disabled  # 根據 URI 是否存在來設置按鈕狀態
                     }
                 ]
-            },
+            }
             "styles": {
                 "header": {
                     "backgroundColor": color_code
