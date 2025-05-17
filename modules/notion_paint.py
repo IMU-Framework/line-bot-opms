@@ -122,7 +122,7 @@ def build_paint_table_flex():
 
         bubble = {
             "type": "bubble",
-            "size": "micro",
+            "size": "deca",
             "header": {
                 "type": "box",
                 "layout": "vertical",
@@ -132,7 +132,7 @@ def build_paint_table_flex():
                         "text": title,
                         "color": text_color,  # 根據背景色自動調整文字顏色
                         "align": "start",
-                        "size": "lg",
+                        "size": "xl",
                         "gravity": "center",
                         "weight": "bold"
                     },
