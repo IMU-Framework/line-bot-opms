@@ -47,25 +47,25 @@ def handle_message(event):
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
                     messages=[TextMessage(
-                        text="請輸入下列指令之一：\n- 油漆色號\n- 色卡\n- 企業識別 or CIS"
+                        text="請輸入下列指令之一：\n- 油漆色號\n- 企業識別 or CIS"
                     )]
                 )
             )
 
-        elif text == "油漆色號":
-            with open("flex_templates/paint.json", "r", encoding="utf-8") as f:
-                paint_flex = json.load(f)
-            api.reply_message(
-                ReplyMessageRequest(
-                    reply_token=event.reply_token,
-                    messages=[FlexMessage(
-                        alt_text="油漆色號",
-                        contents=FlexContainer.from_dict(paint_flex)
-                    )]
-                )
-            )
+        # elif text == "油漆色號":
+        #     with open("flex_templates/paint.json", "r", encoding="utf-8") as f:
+        #         paint_flex = json.load(f)
+        #     api.reply_message(
+        #         # ReplyMessageRequest(
+        #         #     reply_token=event.reply_token,
+        #         #     # messages=[FlexMessage(
+        #         #     #     alt_text="油漆色號",
+        #         #     #     contents=FlexContainer.from_dict(paint_flex)
+        #         #     # )]
+        #         # )
+        #     )
 
-        elif text == "色卡":
+        elif text in ["油漆色號", "油漆色卡", "油漆"]:
             try:
                 flex = build_paint_table_flex()
                 print("✅ Flex JSON 輸出：", json.dumps(flex, ensure_ascii=False, indent=2))  # DEBUG
