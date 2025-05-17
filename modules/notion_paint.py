@@ -122,7 +122,7 @@ def build_paint_table_flex():
 
         bubble = {
             "type": "bubble",
-            "size": "deca",
+            "size": "micro",
             "header": {
                 "type": "box",
                 "layout": "vertical",
@@ -239,7 +239,7 @@ def build_paint_table_flex():
             "styles": {
                 "header": {
                     "backgroundColor": color_code,
-                    "height": "120px"
+                    # "height": "120px"
                 },
                 "footer": {
                     "separator": False
