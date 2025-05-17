@@ -96,7 +96,7 @@ def build_paint_table_flex():
         uri = props.get("uri", {}).get("url", "")
         button_disabled = not bool(uri)  # 如果 uri 為空則禁用按鈕
         if not uri:
-            # 當 URI 為空時，使用不同的內容呈現方式，而不是按鈕
+            # 當 URI 為空時，回傳postback
             footer_content = {
                 "type": "button",
                 "style": "link",
@@ -107,7 +107,7 @@ def build_paint_table_flex():
                       "data": "user requests for detail"
                 }
         else:
-            # 當 URI 有值時，使用按鈕
+            # 當 URI 有值時，使用按鈕進行外部連結
             footer_content = {
                 "type": "button",
                 "style": "link"
