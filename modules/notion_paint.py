@@ -87,6 +87,7 @@ def build_paint_table_flex():
                 "spacing": "md",
                 "paddingAll": "12px",
                 "contents": [
+                    # site1
                     {
                         "type": "box",
                         "layout": "baseline",
@@ -95,10 +96,10 @@ def build_paint_table_flex():
                             {
                                 "type": "text",
                                 "text": "位置1",
-                                "color": "#8C8C8C",
-                                "size": "sm",
-                                "wrap": True,
                                 "flex": 1
+                                "size": "sm",
+                                "color": "#8C8C8C",
+                                # "wrap": True,
                             },
                             {
                                 "type": "text",
@@ -109,6 +110,7 @@ def build_paint_table_flex():
                             }
                         ]
                     },
+                    # site2
                     {
                         "type": "box",
                         "layout": "baseline",
@@ -124,12 +126,13 @@ def build_paint_table_flex():
                                 "type": "text",
                                 "text": site2,
                                 "flex": 2,
-                                "color": "#666666",
                                 "size": "sm"
+                                "color": "#666666",
+
                             }
                         ]
                     },
-                    # 補充 site3 顯示
+                    # site3
                     {
                         "type": "box",
                         "layout": "baseline",
@@ -145,8 +148,8 @@ def build_paint_table_flex():
                                 "type": "text",
                                 "text": site3,
                                 "flex": 2,
-                                "color": "#666666",
                                 "size": "sm"
+                                "color": "#666666",
                             }
                         ]
                     }
@@ -169,8 +172,8 @@ def build_paint_table_flex():
                             "label": color_number,
                             "uri": uri
                         },
-                        "style": "primary",
-                        "color": color_code,
+                        "style": "link",
+                        # "color": color_code,
                         "disabled": button_disabled  # 根據 URI 是否存在來設置按鈕狀態
                     }
                 ]
