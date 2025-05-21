@@ -42,7 +42,7 @@ def handle_message(event):
     with ApiClient(configuration) as api_client:
         api = MessagingApi(api_client)
 
-        if text == "查詢功能索引":
+        if text == "其他查詢":
             api.reply_message(
                 ReplyMessageRequest(
                     reply_token=event.reply_token,
