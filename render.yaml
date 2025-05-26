@@ -9,5 +9,3 @@ services:
     envVars:
       - key: LINE_CHANNEL_ACCESS_TOKEN
       - key: LINE_CHANNEL_SECRET
-      - key: NOTION_DB_ID
-      - key: NOTION_TOKEN
